@@ -1,39 +1,24 @@
-import { profile } from '../data'
+import { brand, getProfileLinks, team } from '../data/team'
 
 export default function Footer() {
-  const year = new Date().getFullYear()
   return (
-    <footer style={{
-      borderTop: '1px solid var(--border)',
-      background: 'var(--bg2)',
-      padding: '2.5rem 0',
-    }}>
-      <div className="container" style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: '1rem',
-      }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1rem' }}>
-          Alex<span style={{ color: 'var(--accent)' }}>.</span>
-        </div>
-        <p style={{ fontSize: '0.82rem', color: 'var(--text-dim)' }}>
-          © {year} {profile.name} — Diseñado y construido con React + Vite
-        </p>
-        <div style={{ display: 'flex', gap: 16 }}>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: '0.82rem', color: 'var(--text-dim)', transition: 'color var(--transition)' }}
-            onMouseEnter={e => e.target.style.color = 'var(--text)'}
-            onMouseLeave={e => e.target.style.color = 'var(--text-dim)'}
-          >LinkedIn</a>
-          <a href={profile.github} target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: '0.82rem', color: 'var(--text-dim)', transition: 'color var(--transition)' }}
-            onMouseEnter={e => e.target.style.color = 'var(--text)'}
-            onMouseLeave={e => e.target.style.color = 'var(--text-dim)'}
-          >GitHub</a>
-          <a href={`mailto:${profile.email}`}
-            style={{ fontSize: '0.82rem', color: 'var(--text-dim)', transition: 'color var(--transition)' }}
-            onMouseEnter={e => e.target.style.color = 'var(--text)'}
-            onMouseLeave={e => e.target.style.color = 'var(--text-dim)'}
-          >Email</a>
+    <footer className="site-footer">
+      <div className="container footer-inner">
+        <a className="brand" href="#inicio" aria-label={`${brand.name}, volver al inicio`}>
+          <span className="brand-mark" aria-hidden="true"><span /><span /></span>
+          <span>{brand.name}</span>
+        </a>
+        <p>© {new Date().getFullYear()} {brand.name}.</p>
+        <div className="footer-links">
+          {team.flatMap(profile =>
+            getProfileLinks(profile)
+              .filter(link => link.label === 'GitHub' || link.label === 'LinkedIn')
+              .map(link => (
+                <a key={`${profile.id}-${link.label}`} href={link.href} target="_blank" rel="noopener noreferrer">
+                  {profile.name} · {link.label}
+                </a>
+              )),
+          )}
         </div>
       </div>
     </footer>

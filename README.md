@@ -1,63 +1,43 @@
-# Portafolio Profesional — React + Vite
+# Portafolio colaborativo — React + Vite
 
-Portafolio de alto rendimiento construido con React 18 y Vite. Diseño oscuro con acento lima, totalmente responsive.
+Portafolio de dos perfiles profesionales. El contenido y la identidad visual se administran por separado del diseño; los datos faltantes se muestran como pendientes y los enlaces vacíos no generan botones.
 
 ## Inicio rápido
 
 ```bash
-# 1. Instalar dependencias
 npm install
-
-# 2. Correr en desarrollo
 npm run dev
-
-# 3. Abrir en el navegador
-# http://localhost:5173
 ```
 
-## Estructura de archivos
+## Personalizar perfiles y proyectos
 
-```
-src/
-├── components/
-│   ├── Navbar.jsx       # Navbar sticky con menú móvil
-│   ├── Hero.jsx         # Sección hero con stats y CTAs
-│   ├── Projects.jsx     # Galería de proyectos con filtros
-│   ├── Services.jsx     # Servicios ofrecidos
-│   ├── About.jsx        # Biografía y skills
-│   ├── Testimonials.jsx # Testimonios de clientes
-│   ├── Contact.jsx      # Formulario de contacto con validación
-│   └── Footer.jsx       # Pie de página
-├── data.js              # ← EDITA TU INFORMACIÓN AQUÍ
-├── App.jsx              # Ensamblaje de secciones
-├── index.css            # Tokens de diseño y estilos globales
-└── main.jsx             # Entrada React
-```
+Edita únicamente [`src/data/team.js`](./src/data/team.js) para actualizar:
 
-## Personalización rápida
+- La identidad descriptiva y provisional del portafolio (`brand`), sin asumir un nombre de empresa.
+- Los perfiles en `team`, incluidos estudios, habilidades, experiencia, certificaciones, enlaces, fotografía y hoja de vida.
+- Los proyectos asociados a cada perfil, con su resumen, tecnologías, funcionalidades, estado y enlaces.
 
-### 1. Cambia tu información personal
-Edita `src/data.js` — ahí están tus proyectos, habilidades, testimonios y datos de contacto.
+La hoja de vida pública de Yojhan está en `public/docs/yojhan-arias-correa-cv.pdf`. Es una copia reconstruida sin número de identificación, fecha de nacimiento, teléfono ni correo personal; reemplaza ese archivo si preparas una versión pública nueva.
 
-### 2. Cambia los colores
-En `src/index.css` edita las variables CSS en `:root`:
-- `--accent` → Color de acento principal (actualmente lima #c8f542)
-- `--bg` → Fondo principal
-- `--text` → Color de texto
+Usa `null` para los campos opcionales no disponibles y listas vacías (`[]`) cuando aún no haya elementos. El perfil de Marcela está preparado con todos los campos vacíos; solo se le atribuye el nombre indicado. Los tipos de los objetos están documentados con JSDoc y `validateTeamConfiguration()` comprueba la estructura y los destinos permitidos para los enlaces.
 
-### 3. Conecta el formulario de contacto
-En `src/components/Contact.jsx`, reemplaza el `setTimeout` con una llamada real:
-- **EmailJS** (sin backend): https://www.emailjs.com
-- **Resend** (con Vercel Functions): https://resend.com
+Las descripciones actuales de los proyectos de Yojhan se basan en la información disponible. Los enlaces y los detalles técnicos o estados no confirmados se dejan vacíos o identificados como pendientes de verificación.
 
-### 4. Deploy en Vercel
+## Comprobaciones y producción
+
 ```bash
 npm run build
-# Sube la carpeta dist/ a Vercel o conecta el repo en vercel.com
+npm run preview
 ```
 
-## Stack tecnológico
-- **React 18** + **Vite 5**
-- **CSS Variables** para theming (sin dependencias de CSS-in-JS)
-- **Google Fonts** — Syne (display) + Inter (body)
-- Totalmente responsive (mobile-first)
+El formulario de contacto no se simula: cuando se configuren correos en los perfiles, se mostrarán enlaces `mailto:`. Para un formulario con envío real habrá que conectar un servicio o backend y gestionar sus credenciales fuera del frontend.
+
+## Despliegue
+
+Ejecuta `npm run build` y publica el directorio `dist/` en un alojamiento de sitios estáticos, como Vercel, Netlify o GitHub Pages.
+
+## Tecnologías
+
+- React 18
+- Vite 5
+- CSS con variables y media queries; no se agregan dependencias de UI.
